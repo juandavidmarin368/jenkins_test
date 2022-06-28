@@ -122,6 +122,7 @@ class Task1 implements Serializable{
                     snyk --version
                     set -x
                 """,true)
+                 ctx.println(stdout)    
           }  
 
     }
