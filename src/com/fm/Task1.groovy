@@ -119,6 +119,7 @@ class Task1 implements Serializable{
               String stdout = shell.exec("""
                     set +x    
                     snyk config set api=7bb46047-a419-4251-a86e-db2bf19b7d19
+                    snyk --version
                     set -x
                 """,true)
           }  
