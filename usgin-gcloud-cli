@@ -1,0 +1,32 @@
+
+IN JENKINS
+
+docker run -it -e CLOUDSDK_CONFIG=/home/centos/tmp/gcloud/gcloud -v /home/centos/tmp/gcloud/gcloud:/home/centos/tmp/gcloud/gcloud -v /home/centos/tmp/gcloud/gcp-key.json:/home/centos/tmp/gcloud/gcp-key.json google/cloud-sdk:latest gcloud auth activate-service-account toor-409@toor-409.iam.gserviceaccount.com --key-file=/home/centos/tmp/gcloud/gcp-key.json
+
+
+docker run -it -e CLOUDSDK_CONFIG=/home/centos/tmp/gcloud/gcloud -v /home/centos/tmp/gcloud/gcloud:/home/centos/tmp/gcloud/gcloud -v /home/centos/tmp/gcloud/gcp-key.json:/home/centos/tmp/gcloud/gcp-key.json google/cloud-sdk:latest gcloud config set project dev-test-29-uat
+
+
+
+
+gcloud config set project dev-test-29-uat
+
+
+
+gcloud secrets versions access 1 --secret=dev-juandavid_github_token
+
+
+
+
+
+/home/centos/tmp/gcloud/gcloud
+
+
+docker run -it -e CLOUDSDK_CONFIG=/home/centos/tmp/gcloud/gcloud -v /home/centos/tmp/gcloud/gcloud:/home/centos/tmp/gcloud/gcloud -v /home/david/gcp-key.json:/home/centos/tmp/gcloud/gcp-key.json google/cloud-sdk:latest gcloud secrets versions access 1 --secret=uat-juandavid_github_token
+
+
+docker run -it -e CLOUDSDK_CONFIG=/home/centos/tmp/gcloud2/gcloud -v /home/centos/tmp/gcloud2/gcloud:/home/centos/tmp/gcloud2/gcloud -v /home/david/gcp-key.json:/home/centos/tmp/gcloud2/gcp-key.json google/cloud-sdk:latest gcloud secrets versions access 1 --secret=temporal
+
+
+
+docker run -it -e CLOUDSDK_CONFIG=/home/centos/tmp/gcloud/gcloud -v /home/centos/tmp/gcloud/gcloud:/home/centos/tmp/gcloud/gcloud -v /home/david/gcp-key.json:/home/centos/tmp/gcloud/gcp-key.json google/cloud-sdk:latest gcloud config set project dev-test-29-uat

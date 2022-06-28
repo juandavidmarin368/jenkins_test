@@ -1,0 +1,22 @@
+try {
+                String options = "-u 0 -v /var/run/docker.sock:/var/run/docker.sock"
+                String terraformImage = "vi-nexus.lab.vi.local/terraform-build-agent-aws:0.12.28"
+                docker.withRegistry(VwRef.NEXUS_REGISTRY) {
+                    build.initialize()
+                    def buildDocker = docker.image(Ref.TERRAFORM_IMAGE)
+                    buildDocker.pull()
+                    timeout(buildTimeoutMinutes) {
+                        buildDocker.inside(options) {
+                            stage('Sign') {
+                                UpdateBundle updateBundle = new UpdateBundle(this, build, updPath, deleteUnsignedUpd, reason, bundleVersion)
+                                Map result = updateBundle.sign()
+                                build.handleResult(result)
+                            }
+                        }
+                    }
+                } 
+            }catch (Exception x) {
+                build.handleException(x)
+            } finally {
+                notification.send(build)
+            }
