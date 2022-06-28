@@ -47,6 +47,7 @@ class Task1 implements Serializable{
         this.accessKey = security.findCredentialSecret("FM_ACCESS_KEY") //CREATE A SECRET TEXT IN JENKINS CREDENTIALS, AND GIVE IT AN ID TO GET IT, IN THIS CASE THE ID WAS FM_ACCESS_KEY
         this.secretKey = security.findCredentialSecret("FM_SECRET_KEY")
         this.awsApi = new AWSApi(ctx,accessKey,secretKey)
+        this.shell = new Shell(ctx)
     }
 
     Task1(ctx,environment,serviceName,gitRepoUrl,serviceType,dbname) {
