@@ -112,7 +112,7 @@ class Task1 implements Serializable{
         
         ctx.sh""" echo 'from here...' """
 
-        String options = "-u 0 -v $(pwd)/:/project"
+        String options = "-u 0 -v \$(pwd)/\:/project"
         def buildDocker = ctx.docker.image("snyk/snyk:docker")
             buildDocker.inside(options) {
 
