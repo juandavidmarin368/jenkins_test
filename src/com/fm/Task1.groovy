@@ -112,13 +112,13 @@ class Task1 implements Serializable{
         
         ctx.sh""" echo 'from here...' """
 
-        String options = "-u 0"
+        String options = "-u 0 -v "+$(pwd)+":/project"
         def buildDocker = ctx.docker.image("snyk/snyk:docker")
             buildDocker.inside(options) {
 
               String stdout = shell.exec("""
                     set +x    
-                    echo '\$(pwd)/:/project'
+
                     snyk config set api=7bb46047-a419-4251-a86e-db2bf19b7d19
                     snyk --version
                     set -x
