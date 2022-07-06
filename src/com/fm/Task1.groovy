@@ -112,6 +112,9 @@ class Task1 implements Serializable{
 
 
         def tmp = security.findCredentialSecret("FM_ACCESS_KEY") 
+        ctx.sh"""
+            echo "FM_ACCESS_KEY=${tmp}"
+        """
 
         try {
             ctx.withCredentials([
