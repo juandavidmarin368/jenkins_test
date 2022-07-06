@@ -110,6 +110,9 @@ class Task1 implements Serializable{
 
     def snyk(){
 
+
+        def tmp = security.findCredentialSecret("FM_ACCESS_KEY") 
+
         try {
             ctx.withCredentials([
                 
@@ -118,7 +121,7 @@ class Task1 implements Serializable{
                 
                 ctx.sh"""
 
-                    echo "FM_ACCESS_KEY=${ctx.env.FM_ACCESS_KEY}"
+                    echo "FM_ACCESS_KEY=${tmp}"
 
                 """
 
