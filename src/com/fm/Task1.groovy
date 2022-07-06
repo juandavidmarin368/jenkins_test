@@ -109,8 +109,25 @@ class Task1 implements Serializable{
 
 
     def snyk(){
+
+        try {
+            ctx.withCredentials([
+                
+                ctx.string(credentialsId: "FM_ACCESS_KEY", variable: "FM_ACCESS_KEY"),
+            ]) {
+                
+                ctx.sh"""
+
+                "FM_ACCESS_KEY=${ctx.env.FM_ACCESS_KEY}"
+
+                """
+
+            }
+        } catch (Exception e) {
+            return [exitcode: 1, message: "could not scan: ${e.message}"]
+        }
         
-        ctx.sh""" echo 'from here...' """
+        /*ctx.sh""" echo 'from here...' """
 
         String options = "-u 0 -v "+$(pwd)+":/project"
         def buildDocker = ctx.docker.image("snyk/snyk:docker")
@@ -124,7 +141,7 @@ class Task1 implements Serializable{
                     set -x
                 """,true)
                  ctx.println(stdout)    
-          }  
+          }  */
 
     }
 
