@@ -118,7 +118,7 @@ class Task1 implements Serializable{
                 
                 ctx.sh"""
 
-                "FM_ACCESS_KEY=${ctx.env.FM_ACCESS_KEY}"
+                    echo "FM_ACCESS_KEY=${ctx.env.FM_ACCESS_KEY}"
 
                 """
 
