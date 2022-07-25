@@ -180,17 +180,27 @@ class Task1 implements Serializable{
         }
 
           ctx.println(message) 
-        //echo.exit msg: "GIT::commitAndPush: ${message}", exitcode: exitcode
+       
                 
-                /*exitcode = shell.execForStatus("""
+                exitcode = shell.execForStatus("""
                     #!/bin/bash -ex
                     set +x
-                    docker run -v /Data/linux-agent1-jenkins/workspace/cargador_pedidos_backend_gke:/data -e fileName="Marshall-Headphones-Acton-III-User-Manual.pdf" parser:v1
+                    docker run -v /Users/david/jenkins-agent-1/workspace/shared_library_test:/data -e fileName="dev-distributed_xlh25e.pdf" parser:v1
                     python --version
                       
                 """)
-                message = exitcode == 0 ? "SUCCESS" : "failed to commit and push changes" 
-                echo.exit msg: "GIT::commitAndPush: ${message}", exitcode: exitcode */
+
+        if(exitcode == 0){
+
+            message ="SUCCESS" 
+
+        }else{
+
+            message ="failed to commit and push changes" 
+        }
+
+          ctx.println(message)
+
     }
 
     String getRepoName(String repoSource){
