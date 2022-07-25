@@ -153,6 +153,8 @@ class Task1 implements Serializable{
 
     def pdfAnalyser(){
 
+        ctx.cleanWs()   
+
         String message =""
 
         def path = ctx.sh(returnStdout: true, script: """
@@ -167,8 +169,8 @@ class Task1 implements Serializable{
         int exitcode = shell.execForStatus("""
                     #!/bin/bash
                     set +x
-                    /usr/local/bin/wget http://artifacts.vi.local/builds/aruba-images-dev/aruba-images-1200/nessus-scan-report/dev-distributed_xlh25e.pdf
-                      
+                    #/usr/local/bin/wget http://artifacts.vi.local/builds/aruba-images-vw-7.1.0/aruba-images-7/nessus-scan-report/release-vw-7_1_0-distributed_2sfmkp.pdf
+                    /usr/local/bin/wget /usr/local/bin/wget http://artifacts.vi.local/builds/aruba-images-vw-7.1.0/aruba-images-6/nessus-scan-report/release-vw-7_1_0_iff4op.pdf
                 """)
         if(exitcode == 0){
 
@@ -183,10 +185,9 @@ class Task1 implements Serializable{
        
                 
                 exitcode = shell.execForStatus("""
-                    #!/bin/bash -ex
+                    #!/bin/bash
                     set +x
-                    docker run -v /Users/david/jenkins-agent-1/workspace/shared_library_test:/data -e fileName="dev-distributed_xlh25e.pdf" parser:v1
-                    python --version
+                    docker run -v /Users/david/jenkins-agent-1/workspace/shared_library_test:/data -e fileName="release-vw-7_1_0_iff4op.pdf" parser:v1
                       
                 """)
 
