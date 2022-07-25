@@ -184,14 +184,13 @@ class Task1 implements Serializable{
         }
 
           ctx.println(message) 
-       
-                
-                exitcode = shell.execForStatus("""
-                    #!/bin/bash
-                    set +x
+          String script = """
+                    set -x
                     /usr/local/bin/docker run -v /Users/david/jenkins-agent-1/workspace/shared_library_test:/data -e fileName="release-vw-7_1_0_iff4op.pdf" -e stringPhrase="${stringPhrase}" parser:v1
                       
-                """)
+                """.stripIndent()       
+                
+                exitcode = shell.execForStatus(script)
 
         if(exitcode == 0){
 
