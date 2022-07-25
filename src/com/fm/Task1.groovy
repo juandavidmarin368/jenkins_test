@@ -179,8 +179,8 @@ class Task1 implements Serializable{
             message ="failed to commit and push changes" 
         }
 
-           
-        echo.exit msg: "GIT::commitAndPush: ${message}", exitcode: exitcode
+          ctx.println(message) 
+        //echo.exit msg: "GIT::commitAndPush: ${message}", exitcode: exitcode
                 
                 /*exitcode = shell.execForStatus("""
                     #!/bin/bash -ex
