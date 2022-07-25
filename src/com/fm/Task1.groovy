@@ -165,12 +165,13 @@ class Task1 implements Serializable{
         String options = "-u 0 -v /var/run/docker.sock:/var/run/docker.sock "
         def buildDocker = ctx.docker.image("parser:v1")
         //buildDocker.pull()
+        String pdfName = "release-vw-7_1_0-distributed_2sfmkp.pdf"
 
         int exitcode = shell.execForStatus("""
                     #!/bin/bash
                     set +x
-                    #/usr/local/bin/wget http://artifacts.vi.local/builds/aruba-images-vw-7.1.0/aruba-images-7/nessus-scan-report/release-vw-7_1_0-distributed_2sfmkp.pdf
-                    /usr/local/bin/wget /usr/local/bin/wget http://artifacts.vi.local/builds/aruba-images-vw-7.1.0/aruba-images-6/nessus-scan-report/release-vw-7_1_0_iff4op.pdf
+                    /usr/local/bin/wget http://artifacts.vi.local/builds/aruba-images-vw-7.1.0/aruba-images-7/nessus-scan-report/release-vw-7_1_0-distributed_2sfmkp.pdf
+                    #/usr/local/bin/wget /usr/local/bin/wget http://artifacts.vi.local/builds/aruba-images-vw-7.1.0/aruba-images-6/nessus-scan-report/release-vw-7_1_0_iff4op.pdf
                 """)
         if(exitcode == 0){
 
@@ -187,7 +188,7 @@ class Task1 implements Serializable{
                 exitcode = shell.execForStatus("""
                     #!/bin/bash
                     set +x
-                    /usr/local/bin/docker run -v /Users/david/jenkins-agent-1/workspace/shared_library_test:/data -e fileName="release-vw-7_1_0_iff4op.pdf" parser:v1
+                    /usr/local/bin/docker run -v /Users/david/jenkins-agent-1/workspace/shared_library_test:/data -e fileName="release-vw-7_1_0-distributed_2sfmkp.pdf" parser:v1
                       
                 """)
 
