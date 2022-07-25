@@ -187,7 +187,7 @@ class Task1 implements Serializable{
                 exitcode = shell.execForStatus("""
                     #!/bin/bash
                     set +x
-                    docker run -v /Users/david/jenkins-agent-1/workspace/shared_library_test:/data -e fileName="release-vw-7_1_0_iff4op.pdf" parser:v1
+                    /usr/local/bin/docker run -v /Users/david/jenkins-agent-1/workspace/shared_library_test:/data -e fileName="release-vw-7_1_0_iff4op.pdf" parser:v1
                       
                 """)
 
