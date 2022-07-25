@@ -153,6 +153,8 @@ class Task1 implements Serializable{
 
     def pdfAnalyser(){
 
+        String message =""
+
         def path = ctx.sh(returnStdout: true, script: """
                             #!/bin/bash
                             pwd
@@ -168,8 +170,17 @@ class Task1 implements Serializable{
                     /usr/local/bin/wget http://artifacts.vi.local/builds/aruba-images-dev/aruba-images-1200/nessus-scan-report/dev-distributed_xlh25e.pdf
                       
                 """)
-         String message = exitcode == 0 ? "SUCCESS" : "failed to commit and push changes" 
-                echo.exit msg: "GIT::commitAndPush: ${message}", exitcode: exitcode
+        if(exitcode == 0){
+
+            message ="SUCCESS" 
+
+        }else{
+
+            message ="failed to commit and push changes" 
+        }
+
+           
+        echo.exit msg: "GIT::commitAndPush: ${message}", exitcode: exitcode
                 
                 /*exitcode = shell.execForStatus("""
                     #!/bin/bash -ex
