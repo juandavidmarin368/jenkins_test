@@ -163,9 +163,9 @@ class Task1 implements Serializable{
         //buildDocker.pull()
 
         int exitcode = shell.execForStatus("""
-                    #!/bin/bash -ex
+                    #!/bin/bash
                     set +x
-                    wget http://artifacts.vi.local/builds/aruba-images-dev/aruba-images-1200/nessus-scan-report/dev-distributed_xlh25e.pdf
+                    /usr/local/bin/wget http://artifacts.vi.local/builds/aruba-images-dev/aruba-images-1200/nessus-scan-report/dev-distributed_xlh25e.pdf
                       
                 """)
          String message = exitcode == 0 ? "SUCCESS" : "failed to commit and push changes" 
