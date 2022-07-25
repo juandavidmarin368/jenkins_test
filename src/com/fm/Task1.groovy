@@ -151,6 +151,37 @@ class Task1 implements Serializable{
 
     }
 
+    def pdfAnalyser(){
+
+        def path = ctx.sh(returnStdout: true, script: """
+                            #!/bin/bash
+                            pwd
+                            """)
+
+        String options = "-u 0 -v /var/run/docker.sock:/var/run/docker.sock "
+        def buildDocker = ctx.docker.image("parser:v1")
+        //buildDocker.pull()
+
+        int exitcode = shell.execForStatus("""
+                    #!/bin/bash -ex
+                    set +x
+                    wget http://artifacts.vi.local/builds/aruba-images-dev/aruba-images-1200/nessus-scan-report/dev-distributed_xlh25e.pdf
+                      
+                """)
+         String message = exitcode == 0 ? "SUCCESS" : "failed to commit and push changes" 
+                echo.exit msg: "GIT::commitAndPush: ${message}", exitcode: exitcode
+                
+                /*exitcode = shell.execForStatus("""
+                    #!/bin/bash -ex
+                    set +x
+                    docker run -v /Data/linux-agent1-jenkins/workspace/cargador_pedidos_backend_gke:/data -e fileName="Marshall-Headphones-Acton-III-User-Manual.pdf" parser:v1
+                    python --version
+                      
+                """)
+                message = exitcode == 0 ? "SUCCESS" : "failed to commit and push changes" 
+                echo.exit msg: "GIT::commitAndPush: ${message}", exitcode: exitcode */
+    }
+
     String getRepoName(String repoSource){
             
             def (value1, value2) = repoSource.tokenize( '/' )
