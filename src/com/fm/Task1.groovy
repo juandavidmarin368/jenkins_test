@@ -156,6 +156,7 @@ class Task1 implements Serializable{
         ctx.cleanWs()   
 
         String message =""
+        String stringPhrase = "Nessus was unable to log into the following host for which"
 
         def path = ctx.sh(returnStdout: true, script: """
                             #!/bin/bash
@@ -188,7 +189,7 @@ class Task1 implements Serializable{
                 exitcode = shell.execForStatus("""
                     #!/bin/bash
                     set +x
-                    /usr/local/bin/docker run -v /Users/david/jenkins-agent-1/workspace/shared_library_test:/data -e fileName="release-vw-7_1_0-distributed_2sfmkp.pdf" parser:v1
+                    /usr/local/bin/docker run -v /Users/david/jenkins-agent-1/workspace/shared_library_test:/data -e fileName="release-vw-7_1_0-distributed_2sfmkp.pdf" -e stringPhrase="${stringPhrase}" parser:v1
                       
                 """)
 
