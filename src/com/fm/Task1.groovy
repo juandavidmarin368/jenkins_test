@@ -39,6 +39,7 @@ class Task1 implements Serializable{
     String dbpassword
     String dbport
     String kubeconfig
+    String cwd
     
     Task1(ctx,environment){
         this.ctx = ctx
@@ -158,6 +159,8 @@ class Task1 implements Serializable{
         String message =""
         String stringPhrase = "Nessus was unable to log into the following host for which"
 
+        cwd = shell.cwd()
+        /*
         def path = ctx.sh(returnStdout: true, script: """
                             #!/bin/bash
                             pwd
@@ -171,8 +174,8 @@ class Task1 implements Serializable{
         int exitcode = shell.execForStatus("""
                     #!/bin/bash
                     set +x
-                    #/usr/local/bin/wget http://artifacts.vi.local/builds/aruba-images-vw-7.1.0/aruba-images-7/nessus-scan-report/release-vw-7_1_0-distributed_2sfmkp.pdf
-                    /usr/local/bin/wget /usr/local/bin/wget http://artifacts.vi.local/builds/aruba-images-vw-7.1.0/aruba-images-6/nessus-scan-report/release-vw-7_1_0_iff4op.pdf
+                    /usr/local/bin/wget http://artifacts.vi.local/builds/aruba-images-vw-7.1.0/aruba-images-7/nessus-scan-report/release-vw-7_1_0-distributed_2sfmkp.pdf
+                    #/usr/local/bin/wget /usr/local/bin/wget http://artifacts.vi.local/builds/aruba-images-vw-7.1.0/aruba-images-6/nessus-scan-report/release-vw-7_1_0_iff4op.pdf
                 """)
         if(exitcode == 0){
 
@@ -186,8 +189,7 @@ class Task1 implements Serializable{
           ctx.println(message) 
           String script = """
                     set -x
-                    /usr/local/bin/docker run -v /Users/david/jenkins-agent-1/workspace/shared_library_test:/data -e fileName="release-vw-7_1_0_iff4op.pdf" -e stringPhrase="${stringPhrase}" parser:v1
-                      
+                    /usr/local/bin/docker run -v /Users/david/jenkins-agent-1/workspace/shared_library_test:/data -e fileName="release-vw-7_1_0-distributed_2sfmkp.pdf" -e stringPhrase="${stringPhrase}" parser:v1   
                 """.stripIndent()       
                 
                 exitcode = shell.execForStatus(script)
@@ -201,7 +203,21 @@ class Task1 implements Serializable{
             message ="failed to commit and push changes" 
         }
 
-          ctx.println(message)
+          ctx.println(message)*/
+
+          String script ="""
+                set -x
+                /usr/local/bin/docker run parser:v1
+          """.stripIndent()
+          int exitCode = 0
+          def buildDocker = ctx.docker.image("parser:v1")
+          String options = "-v ${cwd}:/data -e -e fileName='release-vw-7_1_0-distributed_2sfmkp.pdf' -e stringPhrase=${stringPhrase}"  
+            buildDocker.inside(options) {
+
+                exitCode = shell.execWithLog(script)
+          }  
+
+          ctx.println("status code "+exitCode)
 
     }
 
