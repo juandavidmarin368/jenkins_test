@@ -244,6 +244,8 @@ class Task1 implements Serializable{
 
           ctx.println("status code "+exitCode)*/
 
+
+/*
 Map statustesting = testingIssue()
 
           if(!statustesting.isEmpty()){
@@ -254,6 +256,15 @@ Map statustesting = testingIssue()
 
               ctx.println("everything went ok")
           }  
+        */
+
+
+    def buildDocker = ctx.docker.image("parser:v1")
+          String options = "-v ${cwd}:/data -e -e fileName='release-vw-7_1_0-distributed_2sfmkp.pdf' -e stringPhrase=${stringPhrase}"  
+            buildDocker.inside(options) {
+
+                ctx.sh"python --version"
+          } 
 
 
     }
