@@ -249,7 +249,7 @@ Map statustesting = testingIssue()
           if(!statustesting.isEmpty()){
               ctx.println("status code "+statustesting.message+" message -- "+statustesting.message)
               //ctx.println("status code "+statustesting.message)
-              ctx.sh"return 1"
+              //ctx.sh"return 1"
           }else{
 
               ctx.println("everything went ok")
