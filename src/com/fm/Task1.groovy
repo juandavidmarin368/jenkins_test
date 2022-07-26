@@ -258,13 +258,14 @@ Map statustesting = testingIssue()
           }  
         */
 
+/*
 
     def buildDocker = ctx.docker.image("parser:v1")
           String options = ""  
             buildDocker.inside(options) {
 
                 ctx.sh"python --version"
-          } 
+          } */
 
 
     }
