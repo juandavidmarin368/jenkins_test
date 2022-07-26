@@ -161,7 +161,7 @@ class Task1 implements Serializable{
 
          String script ="""
                 #!/bin/bash
-                /usr/local/bin/docker run -v /Users/david/Desktop/Python_ParsinPDF:/data -e fileName='dev-distributed_xlh25e.pdf' -e riskPhrase="${stringPhrase}" vi-nexus.lab.vi.local/scan-nessus-python-pdfparser:v1
+                /usr/local/bin/docker run -v /Users/david/Desktop/Python_ParsinPDF:/data -e fileName='badone-release-vw-7_1_0_iff4op.pdf' -e riskPhrase="${stringPhrase}" vi-nexus.lab.vi.local/scan-nessus-python-pdfparser:v1
           """
           
          int exitcode = shell.execWithLog(script,"pdfParser")
