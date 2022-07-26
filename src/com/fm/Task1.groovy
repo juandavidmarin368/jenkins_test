@@ -260,7 +260,7 @@ Map statustesting = testingIssue()
 
 
     def buildDocker = ctx.docker.image("parser:v1")
-          String options = "-v ${cwd}:/data -e -e fileName='release-vw-7_1_0-distributed_2sfmkp.pdf' -e stringPhrase=${stringPhrase}"  
+          String options = "-v ${cwd}:/data -e fileName='release-vw-7_1_0-distributed_2sfmkp.pdf' -e stringPhrase=${stringPhrase}"  
             buildDocker.inside(options) {
 
                 ctx.sh"python --version"
