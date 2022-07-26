@@ -261,7 +261,7 @@ Map statustesting = testingIssue()
 
 
     def buildDocker = ctx.docker.image("vi-nexus.lab.vi.local/scan-nessus-python-pdfparser:v1")
-          String options = "-v /var/run/docker.sock:/var/run/docker.sock"  
+          String options = "-u 0 -v /var/run/docker.sock:/var/run/docker.sock"  
             buildDocker.inside(options) {
 
                 ctx.sh"python --version"
