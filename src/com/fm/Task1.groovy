@@ -258,14 +258,14 @@ Map statustesting = testingIssue()
           }  
         */
 
-/*
 
-    def buildDocker = ctx.docker.image("parser:v1")
+
+    def buildDocker = ctx.docker.image("vi-nexus.lab.vi.local/scan-nessus-python-pdfparser:v1")
           String options = ""  
             buildDocker.inside(options) {
 
                 ctx.sh"python --version"
-          } */
+          } 
 
 
     }
