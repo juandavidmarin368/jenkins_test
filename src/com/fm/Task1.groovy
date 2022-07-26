@@ -152,6 +152,29 @@ class Task1 implements Serializable{
 
     }
 
+
+    Map testingIssue(){
+
+        cwd = shell.cwd()
+        
+        String stringPhrase = "Nessus was unable to log into the following host for which"
+
+         String script ="""
+                #!/bin/bash
+                docker run -v ${cwd}:/data -e fileName="release-vw-7_1_0-distributed_2sfmkp.pdf" -e stringPhrase="${stringPhrase}" vi-nexus.lab.vi.local/scan-nessus-python-pdfparser:v1
+          """
+          
+         int exitcode = shell.execWithLog(script,"pdfParser")
+
+        if(exitcode!=0){
+
+            return [ exitcode: exitcode, message: "Nessu could not login to some hosts"]
+
+        }    
+        
+        return [:]
+    }  
+
     def pdfAnalyser(){
 
         ctx.cleanWs()   
@@ -205,6 +228,8 @@ class Task1 implements Serializable{
 
           ctx.println(message)*/
 
+
+            /*
           String script ="""
                 set -x
                 /usr/local/bin/docker run parser:v1
@@ -217,7 +242,19 @@ class Task1 implements Serializable{
                 exitCode = shell.execWithLog(script)
           }  
 
-          ctx.println("status code "+exitCode)
+          ctx.println("status code "+exitCode)*/
+
+Map statustesting = testingIssue()
+
+          if(!statustesting.isEmpty()){
+              ctx.println("status code "+statustesting.message+" message -- "+statustesting.message)
+              //ctx.println("status code "+statustesting.message)
+              ctx.sh"return 1"
+          }else{
+
+              ctx.println("everything went ok")
+          }  
+
 
     }
 
